@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}龙华高级中学校园墙 (゜-゜)つロ 干杯~{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/aos.js"></script>    
+    <link rel="stylesheet" href="/css/main_style_min.css">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand bg-white shadow-sm">  
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="/">
+                <i class="bi bi-chat-square-text fs-4"></i>
+                首页
+            </a>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    校园墙
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/wall">龙高校园墙</a></li>
+                </ul>
+            </div>
+
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-primary" onclick="window.location.href = '/wall#from'">
+                            <i class="bi bi-pencil-square me-1"></i> 立即发言
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% block body_end %}
+    {% endblock %}
+</body>
+</html>

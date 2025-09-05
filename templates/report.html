@@ -1,0 +1,161 @@
+{% extends "main.html" %}
+
+{% block title %}举报{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/css/help_form_min.css">
+{% endblock %}
+
+
+
+{% block content %}
+
+<h1>这则消息有什么问题？</h1>
+<div class="message-item" id="message-{{ message.id }}">
+    <div class="row g-3" style="width: 100%;">
+        <div class="col-12 message-header">
+            <div class="message-timestamp">{{ message.timestamp }}</div>
+        </div>
+        <div class="col-auto">
+            <div class="message-content">
+                {{ message.text }}
+            </div>
+            {% if message.files %}
+            <div class="message-attachments justify-content-start">
+                {% for file in message.files %}
+                {% if file.endswith(('png', 'jpg', 'jpeg', 'gif')) %}
+                    <img loading="lazy" 
+                    class="message-image"
+                    src="{{ static_url }}tiny_files/{{ file }}" 
+                    alt="预览" 
+                    style="cursor: pointer;"
+                    onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">
+                {% elif file.endswith(('mp4', 'avi', 'mov', 'webm')) %}
+                    <div class="video-container" style="cursor: pointer;" onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">
+                        <video autoplay muted class="video-player" playsinline>
+                            <source loading="lazy" src="{{ static_url }}tiny_files/{{ file }}" type="video/mp4">
+                        </video>
+                    </div>
+                {% elif file.endswith(('mp3', 'wav', 'aac', 'flac', 'm4a', 'mid')) %}
+                    <audio controls>
+                        <source loading="lazy" src="{{ static_url }}uploads/{{ file }}" type="audio/mpeg">
+                    </audio>     
+                {% else %}
+                    <span style="cursor: pointer;" onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">📎 附件</span>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% if message.comments %}
+        <div class="col-12" id="comment-box-{{ message.id }}">
+            <div class="comment-header" id="comment-header-{{message.id}}">评论 | {{message.comments | length}}</div>
+            <ul class="comment-box">
+                {% for comment in message.comments %}
+                <li class="comment-item row g-2">
+                    <div class="col-auto comment-content">
+                        <div class="comment-text">{{ comment.text }}</div>
+                        <div class="message-timestamp">{{ message.comments.index(comment)+1 }}楼 {{ comment.timestamp }}</div>
+                    </div>
+                    {% if comment.files %}
+                    <div class="col comment-attachments d-flex justify-content-end">
+                        {% for file in comment.files %}
+                        {% if file.endswith(('png', 'jpg', 'jpeg', 'gif')) %}
+                            <img class="message-image"
+                                style="max-width: 50px;max-height: 50px;"
+                                loading="lazy" 
+                                src="{{ static_url }}tiny_files/{{ file }}" 
+                                alt="预览" 
+                                onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">
+                        {% elif file.endswith(('mp3', 'wav', 'aac', 'flac', 'm4a', 'mid')) %}
+                            <audio controls>
+                                <source loading="lazy" src="{{ static_url }}uploads/{{ file }}" type="audio/mpeg">
+                            </audio>     
+                        {% elif file.endswith(('mp4', 'avi', 'mov', 'webm')) %}
+                            <div class="video-container" onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">
+                                <video autoplay muted class="video-player" playsinline>
+                                    <source loading="lazy" src="{{ static_url }}tiny_files/{{ file }}" type="video/mp4">
+                                </video>
+                            </div>
+                        {% else %}
+                            <span class="file-link" onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">点击下载</span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        <h1>举报</h1>
+    </div>
+    <div class="card-body">
+        <div class="input-form">
+            <form action="/help/report/{{ message.id }}" method="post" enctype="multipart/form-data" id="message-form" onsubmit="return validateForm(this);">
+                <div class="category-section">
+                    <label for="category-select">该消息属于：</label>
+                    <div class="category-options">
+                        <select name="category" id="category-select">
+                            <option value="abuse">恶意行为</option>
+                            <option value="spam">垃圾信息</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+                </div>
+                <input name="email" type="text" placeholder="您的电子邮箱(用于回复您的消息，可选)" id="info-input">
+                <textarea name="text" placeholder="{{placeholder}}" id="text-input"></textarea>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" id="submit-button">
+                        <span>提交</span>
+                        <div id="loading" class="loading" style="display: none;"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <ul class="flashes" id="flashes">
+            {% for message in get_flashed_messages() %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block body_end%}
+<div class="modal fade" id="fileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen m-0">
+        <div class="modal-content p-0">
+            <div class="modal-header" style="background-color: #000000dd;">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="color:black;font-size: 30px; opacity: 1; filter: brightness(1.5);">X</button>
+            </div>
+            <div class="modal-body p-0 m-0" style="background-color: #000000dd; height: 90vh;">
+                <div class="d-flex align-items-center justify-content-center h-100 w-100">
+                    <button class="btn btn-outline-light btn-circle btn-prev position-fixed start-0 top-50 translate-middle-y" 
+                            onclick="prevFile()" style="z-index: 1050;">
+                        <span class="bi bi-chevron-left" style="font-size: 2rem;">←</span>
+                    </button>
+                    
+                    <div id="modalContent" class="text-center w-100 h-100"></div>
+                    
+                    <button class="btn btn-outline-light btn-circle btn-next position-fixed end-0 top-50 translate-middle-y"
+                            onclick="nextFile()" style="z-index: 1050;">
+                        <span class="bi bi-chevron-right" style="font-size: 2rem;">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/report_min.js"></script>
+{% endblock %}
