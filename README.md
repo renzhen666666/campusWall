@@ -1,2 +1,3 @@
 # campusWall
-学校校园墙
+一个基于Flask搭建的学校校园墙
+
