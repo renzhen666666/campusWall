@@ -75,12 +75,11 @@ import atexit
 
 from mail import MailSender
 
-# SSMTP 配置
+# SMTP 配置
 smtp_server = ""
 smtp_port = 465
 sender_email = ""
 email_sender_password = ""
-
 
 EmailSender = MailSender(smtp_server, smtp_port, sender_email, email_sender_password)
 
