@@ -8,8 +8,8 @@
 pip install -r requirements.txt
 ```
 - ### 配置SMTP服务器(可选)
- - **如果没有SMTP服务器**，可以注释掉app.py中76-84行、547-555行和605-616行的代码
- - 填写SMTP服务器的配置信息(app.py:78-84)
+  **如果没有SMTP服务器**，可以注释掉app.py中76-84行、547-555行和605-616行的代码
+  填写SMTP服务器的配置信息(app.py:78-84)
 ```python
 
 smtp_server = ""
