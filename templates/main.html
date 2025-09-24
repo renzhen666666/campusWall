@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}龙华高级中学校园墙 (゜-゜)つロ 干杯~{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/aos.js"></script>
+    {% block head %}
+    {% endblock %}
+    <link rel="stylesheet" href="/css/main_style_min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand bg-white shadow-sm">  
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="/">
+                <i class="bi bi-chat-square-text fs-4"></i>
+                首页
+            </a>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    校园墙
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/wall">龙高校园墙</a></li>
+                </ul>
+            </div>
+
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><button class="nav-link" id="noticeBtn" data-bs-toggle="modal" data-bs-target="#notice">公告</button></li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-primary" onclick="window.location.href = '/wall#from'">
+                            <i class="bi bi-pencil-square me-1"></i> 立即发言
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <div class="modal fade" id="notice" tabindex="-1" aria-labelledby="noticeLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-height: 500px;overflow-y: auto;">
+            <div class="modal-content" style="background-color: #fff;">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="noticeLabel">公告</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body" id="notice-content">
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">加载中...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="fileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen m-0">
+            <div class="modal-content p-0">
+                <div class="modal-header" style="background-color: #000000dd;">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="color:black;font-size: 30px; opacity: 1; filter: brightness(1.5);">X</button>
+                </div>
+                <div class="modal-body p-0 m-0" style="background-color: #000000dd; height: 90vh;">
+                    <div class="d-flex align-items-center justify-content-center h-100 w-100">
+                        <button class="btn btn-outline-light btn-circle btn-prev position-fixed start-0 top-50 translate-middle-y" 
+                                onclick="prevFile()" style="z-index: 1050;">
+                            <span class="bi bi-chevron-left" style="font-size: 2rem;">←</span>
+                        </button>
+                        
+                        <div id="modalContent" class="text-center w-100 h-100"></div>
+                        
+                        <button class="btn btn-outline-light btn-circle btn-next position-fixed end-0 top-50 translate-middle-y"
+                                onclick="nextFile()" style="z-index: 1050;">
+                            <span class="bi bi-chevron-right" style="font-size: 2rem;">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% block body_end %}
+    {% endblock %}
+    <script src="/js/notice_min.js"></script>
+</body>
+</html>

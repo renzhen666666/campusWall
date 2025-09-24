@@ -1,0 +1,12 @@
+{
+    "admin": {
+        "username": "admin",
+        "password": "ljkydfagtguydfshjkghsdfjkhgiofdsu",
+        "permissions":[
+            {"name": "view_log", "description": "查看日志", "url": "/admin/log"},
+            {"name": "notice", "description": "发布公告", "url": "/admin/notice"},
+            {"name": "view_help_log", "description": "查看举报", "url": "/admin/report"},
+            {"name": "manage_wall_message", "description": "管理龙高校园墙消息", "url": "/admin/wall", "sch":"lg", "max_delete_message": 10000}
+        ]
+    }
+}

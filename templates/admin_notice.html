@@ -1,0 +1,55 @@
+{% extends "admin_main.html" %}
+
+{% block title %}发布公告{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1>发布公告</h1>
+    </div>
+    <div class="card-body">
+        <div class="input-form">
+            <form action="/admin/notice" method="post" enctype="multipart/form-data" id="message-form" onsubmit="return validateForm(this);">
+                <textarea name="text" placeholder="公告内容(支持html标签)" id="text-input" style="width:100%;height:200px;border:5px solid #ccc;overflow:auto;padding:10px;resize:none"></textarea>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" id="submit-button">
+                        <span>提交</span>
+                        <div id="loading" class="loading" style="display: none;"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <ul class="flashes" id="flashes">
+            {% for message in get_flashed_messages() %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block body_end%}
+<script>
+function validateForm(form) {
+    const textInput = document.getElementById('text-input');
+    const text = textInput.value.trim();
+    if (!text) {
+        flashMessage('请输入公告内容');
+        textInput.focus();
+        return false;
+    }
+    return true;
+}
+
+async function flashMessage(text) {
+    const flashes = document.getElementById('flashes');
+    const flash = document.createElement('li');
+    flash.textContent = text;
+    flashes.appendChild(flash);
+    setTimeout(() => {
+        flashes.children[0].remove();
+    }, 5000);
+}
+</script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+
+{% block title %}{% if partition %} {{ partition.name }} {% endif %}分区 - 龙华高级中学校园墙{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/wall_min.css">
+<link rel="stylesheet" href="/static/css/partitions_min.css">"
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card filter-sort-container">
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                        <h1 class="partition-name mb-0">{{ partition.name }} 区</h1>
+                        <div class="message-count-container">
+                            <span class="badge bg-light text-dark" id="message-num">
+                                <span class="spinner-border spinner-border-sm" role="status">
+                                    <span class="visually-hidden">加载中...</span>
+                                </span>
+                                条消息
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="messages-container">
+                <ul class="message-box" id="message-box">
+                    <li id="loadingMessage">
+                        <div class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">加载中...</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_end %}
+<div hidden id="partitionName">{{ partition.name }}</div>
+<script src="/js/partitions_min.js"></script>
+<script src="/js/like_min.js"></script>
+{% endblock %}

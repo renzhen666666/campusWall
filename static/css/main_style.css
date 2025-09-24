@@ -1,0 +1,197 @@
+:root {
+    --primary-color: #6A0DAD;
+    --secondary-color: #9B59B6;
+    --text-color: #333;
+    --background-color: #f5f5f5;
+    --font-color: #333;
+}
+
+body {
+    padding-top: 70px !important;
+}
+
+
+main.container {
+    margin-top: 80px !important; /* 调整数值以匹配导航栏高度 */
+}
+
+.message-comments form button {
+    padding: 10px 20px !important;
+    background-color: #6A0DAD !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    margin-top: 10px !important;
+    transition: background 0.2s ease !important;
+}
+
+.message-comments form button:hover {
+    background-color: #6A0DAD !important;
+}
+
+.input-form form button {
+    padding: 10px 20px !important;
+    background-color: #6A0DAD !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    margin-top: 10px !important;
+    transition: background 0.2s ease !important;
+}
+
+.input-form form button:hover {
+    background-color: #6A0DAD !important;
+}
+
+.back-link {
+    display: inline-block !important;
+    margin-top: 10px !important;
+    color: #6A0DAD !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+.back-link:hover {
+    color: #6A0DAD !important;
+}
+
+.progress-bar {
+    width: 0% !important;
+    height: 20px !important;
+    background-color: #6A0DAD !important;
+    transition: width 0.3s ease !important;
+}
+
+/* 导航栏样式 */
+.navbar {
+    position: fixed !important;
+    top: 0 !important;
+    max-height: 50px !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    background: linear-gradient(135deg, #6A0DAD 0%, #9B59B6 100%) !important;
+    box-shadow: 0 2px 15px rgba(106, 13, 173, 0.2) !important;
+    padding: 1rem 0 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.nav-link:hover {
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
+
+.flashes {
+    margin-top: 10px !important;
+    list-style-type: none !important;
+    padding: 0 !important;
+}
+
+.flashes li {
+    background: #ffcccc !important;
+    padding: 10px !important;
+    border-radius: 5px !important;
+    color: #800000 !important;
+    margin-bottom: 10px !important;
+    border: 1px solid #ff9999 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #6A0DAD 0%, #9B59B6 100%) !important;
+    border-color: #6A0DAD !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.3) !important;
+}
+
+.btn-outline-primary {
+    border: 1px solid #6A0DAD !important;
+    color: #6A0DAD !important;
+    border-color: #6A0DAD !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #6A0DAD !important;
+    border-color: #6A0DAD !important;
+    color: white !important;
+}
+
+.btn-close-white {
+    filter: invert(1) !important;
+}
+
+.btn-circle {
+    border-radius: 50% !important;
+    width: 50px !important;
+    height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.btn-prev, .btn-next {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.btn-prev:hover, .btn-next:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.btn-close {
+    width: 24px !important;
+    height: 24px !important;
+    background: #f0f0f0 !important;
+    border-radius: 50% !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    color: var(--primary-color) !important;
+}
+
+.btn-refresh {
+    padding: 5px 10px !important; 
+    border: 2px solid var(--primary-color) !important;
+    border-radius: 20px !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%) !important;
+    color: #6A0DAD !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 0.85rem !important;
+}
+
+.btn-refresh:hover {
+    background: linear-gradient(135deg, #6A0DAD 0%, #9B59B6 100%) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
