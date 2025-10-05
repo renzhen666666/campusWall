@@ -7,10 +7,10 @@ import random
 import os
 import json
 
-smtp_server = "smtp.share-email.com"
+smtp_server = ""
 smtp_port = 465
-sender_email = "admin@rz101.com"
-sender_password = "mail@wang2010"
+sender_email = ""
+sender_password = ""
 
 
 class MailSender:

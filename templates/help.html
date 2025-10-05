@@ -6,27 +6,32 @@
 {% endblock %}
 
 
-{% block content %}
-<h1>您遇到了什么问题？</h1>
 
-<div class="help-options-container">
-    <div class="help-option-card" onclick="window.location.href='/help/report'">
-        <div class="option-icon">🚩</div>
-        <h3>我被"挂"了</h3>
-        <p>举报删帖</p>
+{% block helpActive %}active{% endblock %}
+
+{% block content %}
+<main class="container">
+    <h1>您遇到了什么问题？</h1>
+
+    <div class="help-options-container">
+        <div class="help-option-card" onclick="window.location.href='/help/report'">
+            <div class="option-icon">🚩</div>
+            <h3 class="white-text">我被"挂"了</h3>
+            <p class="white-text">举报删帖</p>
+        </div>
+        
+        <div class="help-option-card" onclick="window.location.href='/help/form?ti=联系我们&h1=联系我们&te=如果您有任何问题或建议，请填写以下表单，我们会尽快回复您。'">
+            <div class="option-icon">💬</div>
+            <h3 class="white-text">联系我们</h3>
+        </div>
+        
+        <div class="help-option-card" onclick="window.location.href='/help/form?ti=意见反馈&h1=意见反馈'">
+            <div class="option-icon">📝</div>
+            <h3 class="white-text">意见反馈</h3>
+            <p class="white-text">向我们提出宝贵建议</p>
+        </div>
     </div>
-    
-    <div class="help-option-card" onclick="window.location.href='/help/form?ti=联系我们&h1=联系我们&te=如果您有任何问题或建议，请填写以下表单，我们会尽快回复您。'">
-        <div class="option-icon">💬</div>
-        <h3>联系我们</h3>
-    </div>
-    
-    <div class="help-option-card" onclick="window.location.href='/help/form?ti=意见反馈&h1=意见反馈'">
-        <div class="option-icon">📝</div>
-        <h3>意见反馈</h3>
-        <p>向我们提出宝贵建议</p>
-    </div>
-</div>
+</main>
 {% endblock %}
 
 

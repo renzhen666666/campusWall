@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>客服回复 - 龙高校园墙</title>
+    <title>邮箱验证码 - 龙高校园墙</title>
     <style>
         :root {
             --primary-color: #6A0DAD;
@@ -53,16 +53,34 @@
             margin-bottom: 20px;
         }
         
-        .message-box {
+        .verification-box {
             background-color: var(--light-bg);
             border-left: 4px solid var(--primary-color);
             padding: 20px;
             border-radius: 0 var(--border-radius) var(--border-radius) 0;
             margin: 25px 0;
+            text-align: center;
         }
         
-        .response-content {
-            margin: 25px 0;
+        .verification-code {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: var(--primary-color);
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(106, 13, 173, 0.1);
+            display: inline-block;
+        }
+        
+        .warning {
+            background-color: #fff8e6;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            border-left: 4px solid #FF9800;
         }
         
         .signature {
@@ -108,78 +126,27 @@
             border-radius: 4px;
             font-weight: 500;
         }
-
-        .message-item {
-            position: relative;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-            display: block;
-            padding: 10px;
-            margin-bottom: 10px;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(106, 13, 173, 0.1);
-            border: 1px solid rgba(106, 13, 173, 0.05);
-        }
-
-        .message-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(106, 13, 173, 0.15);
-            transform: none;
-        }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid rgba(106, 13, 173, 0.1);
-        }
-
-        .message-timestamp {
-            font-size: 0.75rem;
-            color: #6A0DAD;
-            font-weight: 500;
-        }
-
-        .message-content {
-            flex: 1;
-            width: auto;
-            word-break: break-word;
-            overflow-wrap: break-word;
-            margin-bottom: 10px;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            color: #333;
-        }
     </style>
 </head>
 <body>
     <div class="email-container">
         <div class="email-header">
-            <h1>龙高校园墙 系统回复</h1>
+            <h1>龙高校园墙 验证码</h1>
         </div>
         
         <div class="email-content">
             <p class="greeting">亲爱的同学：</p>
             
-            <p>感谢您联系龙高校园墙。我们已收到您的反馈</p>
+            <p>您正在申请获取龙高校园墙的邮箱验证码，以下是您的验证码：</p>
             
-            <div class="message-box">
-                <strong>strongtitle</strong>
-                <div class="message-item">
-                    <div class="message-header">
-                        <span class="message-timestamp">messagetimestamp</span>
-                    </div>
-                    <div class="message-content">
-                        messagecontent
-                    </div>
-                </div>
+            <div class="verification-box">
+                <p>您的验证码是：</p>
+                <div class="verification-code">verificationcode</div>
+                <p>验证码有效期为10分钟，请尽快使用。</p>
             </div>
             
-            <div class="response-content">
-                <strong>messageresponse</strong>
+            <div class="warning">
+                <p><strong>安全提醒：</strong>请勿将验证码透露给他人，包括以任何理由索要验证码的客服或工作人员。</p>
             </div>
             
             <div style="text-align: center; margin: 30px 0;">

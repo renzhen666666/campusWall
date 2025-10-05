@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <title>{% block title %}龙华高级中学校园墙 (゜-゜)つロ 干杯~{% endblock %}</title>
     <meta charset="utf-8">
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/aos.css">
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/aos.js"></script>
+    
     {% block head %}
     {% endblock %}
     <link rel="stylesheet" href="/css/main_style_min.css">
@@ -15,42 +16,87 @@
 <body>
     <nav class="navbar navbar-expand bg-white shadow-sm">  
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="/">
-                <i class="bi bi-chat-square-text fs-4"></i>
-                首页
-            </a>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    校园墙
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/wall">龙高校园墙</a></li>
-                </ul>
-            </div>
-
+            <button class="btn-menu" id="sidebarToggle" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                <img src="/img/menu.png" alt="菜单" style="width:30px; height:30px; filter: invert(1);">
+            </button>
             <div class="navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><button class="nav-link" id="noticeBtn" data-bs-toggle="modal" data-bs-target="#notice">公告</button></li>
+
+                    {% block nav %}
+                    
+                    {% endblock %}
+
+                    {% block publish_btn %}
                     <li class="nav-item ms-2">
-                        <button class="btn btn-primary" onclick="window.location.href = '/wall#from'">
-                            <i class="bi bi-pencil-square me-1"></i> 立即发言
+                        <button class="white btn btn-primary" id="publishBtn" onclick="window.location.href = '/wall#publish'">
+                            <i class="bi bi-pencil-square me-1"></i> 我要发贴
+                        </button>
+                    </li>
+                    {% endblock %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarLabel">
+                <button id="theme-toggle" class="theme-toggle btn btn-outline-light">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </h5>
+            <button type="button" class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: transparent;">
+                <img src="/img/menu-fold.png" alt="关闭菜单" style="width:30px; height:30px; filter: invert(1);"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="sidebar-menu">
+                <ul class="list-unstyled">
+                    <li class="sidebar-item">
+                        <a href="/" class="nav-link sidebar-link {% block homeActive %}{% endblock %}">
+                            <i class="bi bi-house-door me-3"></i>
+                            <span>首页</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/wall" class="nav-link sidebar-link {% block wallActive %}{% endblock %}">
+                            <i class="bi bi-chat-square-text me-3"></i>
+                            <span>校园墙</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/apps" class="nav-link sidebar-link {% block appsActive %}{% endblock %}">
+                            <i class="bi bi-chat-square-text me-3"></i>
+                            <span>应用广场</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/help" class="nav-link sidebar-link {% block helpActive %}{% endblock %}">
+                            <i class="bi bi-question-circle me-3"></i>
+                            <span>帮助</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <button class="nav-link sidebar-link w-100 text-start" data-bs-toggle="modal" data-bs-target="#notice">
+                            <i class="bi bi-bell me-3"></i>
+                            <span>公告</span>
                         </button>
                     </li>
                 </ul>
             </div>
         </div>
-    </nav>
-    <main class="container mt-4">
-        {% block content %}
-        {% endblock %}
-    </main>
+    </div>
+    {% block bodyContent %}
+    {% endblock %}
+
+
+    {% block content %}
+    {% endblock %}
 
     <div class="modal fade" id="notice" tabindex="-1" aria-labelledby="noticeLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-height: 500px;overflow-y: auto;">
-            <div class="modal-content" style="background-color: #fff;">
+        <div class="modal-dialog" style="max-height: 500px;overflow: auto;">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="noticeLabel">公告</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body" id="notice-content">
                     <div class="text-center">
@@ -91,6 +137,8 @@
 
     {% block body_end %}
     {% endblock %}
+    <script src="/js/theme_min.js"></script>
     <script src="/js/notice_min.js"></script>
+    <script>AOS.init({duration: 1000,offset: 100});</script>
 </body>
 </html>

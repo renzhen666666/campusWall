@@ -1,0 +1,9 @@
+{
+    "name": "Branchlet-知记-beta",
+    "partition": "productivity",
+    "author": "冬止无",
+    "appDescription": "一个简单易用的在线笔记应用",
+    "iconBackground": "linear-gradient(135deg, #9B59B6, #8A2BE2);",
+    "appIconElement": "<img src='https://wall.long-gao.com/static/apps/note/icon.png' alt='Branchlet-知记' style='width: 100%;'>",
+    "url": "https://note.renzhen.fun/Branchlet/"
+}

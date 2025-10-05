@@ -77,20 +77,22 @@
 }
 
 .comments-section {
-    background: white;
+    background: transparent;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(106, 13, 173, 0.1);
-    border: 1px solid rgba(106, 13, 173, 0.05);
+    border: 0px;
 }
 
 .comments-header {
+    background-color: var(--box-background);
     padding: 1rem 1.5rem;
     border-bottom: 1px solid rgba(106, 13, 173, 0.1);
     font-weight: 700;
-    color: #6A0DAD;
+    color: var(--secondary-color);
 }
 
 .comments-list {
+    background-color: transparent;
     list-style: none;
     padding: 0;
     margin: 0;

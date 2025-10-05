@@ -1,224 +1,178 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <title>龙华高级中学校园墙 (゜-゜)つロ 干杯~</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="龙华高级中学校园墙">
-    <meta name="keywords" content="龙华高级中学,龙高,校园墙,留言板,学校校园墙,留言,贴吧,论坛,学校社区,高中">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/aos.css">
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/aos.js"></script>
-    <link rel="stylesheet" href="{{jscss_url}}css/index_min.css">
-    <link rel="stylesheet" href="{{jscss_url}}css/main_style_min.css"></link>
-    <script src="{{jscss_url}}js/index_min.js"></script>
-    <script src="{{jscss_url}}js/like_min.js"></script>
-</head>
-<body>
-    <nav class="navbar navbar-expand bg-white shadow-sm">  
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="/">
-                <i class="bi bi-chat-square-text fs-4"></i>
-                首页
-            </a>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    校园墙
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/wall">龙高校园墙</a></li>
-                </ul>
+{% extends "main.html" %}
+
+{% block head %}
+<meta name="description" content="龙华高级中学校园墙">
+<meta name="keywords" content="龙华高级中学,龙高,校园墙,留言板,学校校园墙,留言,贴吧,论坛,学校社区,高中">
+<link rel="stylesheet" href="{{jscss_url}}css/index_min.css">
+<script src="{{jscss_url}}js/index_min.js"></script>
+<script src="{{jscss_url}}js/like_min.js"></script>
+{% endblock %}
+
+{% block nav %}
+<li class="nav-item"><a class="nav-link" href="/apps">应用广场</a></li>
+{% endblock %}
+
+{% block homeActive %}active{% endblock %}
+
+{% block bodyContent %}
+
+<main class="container mt-4">
+    <section class="hero-section text-center text-light">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+                <h1 class="white-text">欢迎来到</h1>
+                <h2 class="white-text display-4">龙华高级中学</h2>
+                <h2 class="white-text display-5 fw-light">校园墙</h2>
+                <span class="white-text lead d-block">本站已运行
+                    <span id="run-day" class="fw-bold text-warning">0</span>天
+                    <span id="run-hour" class="fw-bold text-warning">0</span>小时
+                    <span id="run-min" class="fw-bold text-warning">0</span>分钟
+                    <span id="run-sec" class="fw-bold text-warning">0</span>秒
+                </span>
             </div>
 
-
-            <div class="navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><button class="nav-link" id="noticeBtn" data-bs-toggle="modal" data-bs-target="#notice">公告</button></li>
-                    <li class="nav-item"><a class="nav-link" href="#messages">发现</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/help">帮助</a></li>
-                    <li class="nav-item ms-2">
-                        <button class="btn btn-primary" onclick="window.location.href = '/wall#from'">
-                            <i class="bi bi-pencil-square me-1"></i> 立即发言
-                        </button>
-                    </li>
-                </ul>
+            <div class="col-md-6 d-flex flex-column align-items-center">
+                <a onclick="window.location.href = '/wall'" class="white btn btn-primary me-2 mb-2" style="background-color: #6A0DAD; border-color: #6A0DAD;box-shadow: #6a0dad91;">前往龙高校园墙</a>
             </div>
         </div>
-    </nav>
-    <main class="container mt-4">
-        <section class="hero-section text-center text-light">
-            <div class="row g-4 align-items-center">
-                <div class="col-md-6">
-                    <h1>欢迎来到</h1>
-                    <h2 class="display-4">龙华高级中学</h2>
-                    <h2 class="display-5 fw-light">校园墙</h2>
-                    <span class="lead d-block">本站已运行
-                        <span id="run-day" class="fw-bold text-warning">0</span>天
-                        <span id="run-hour" class="fw-bold text-warning">0</span>小时
-                        <span id="run-min" class="fw-bold text-warning">0</span>分钟
-                        <span id="run-sec" class="fw-bold text-warning">0</span>秒
-                    </span>
-                </div>
+    </section>
 
-                <div class="col-md-6 d-flex flex-column align-items-center">
-                    <a onclick="window.location.href = '/wall'" class="btn btn-primary me-2 mb-2" style="background-color: #6A0DAD; border-color: #6A0DAD;box-shadow: #6a0dad91;">前往龙高校园墙</a>
+    <section id="features" data-aos="fade-up">
+
+        <div class="row flex-column g-4">
+            <div class="col-12">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <h2 class="card-title mt-3">让校园墙再次伟大!</h2>
+                        <p class="card-text">更适合龙高宝宝体质的校园墙</p>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <section id="features" data-aos="fade-up">
-
-            <div class="row flex-column g-4">
-                <div class="col-12">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h2 class="card-title mt-3">让校园墙再次伟大!</h2>
-                            <p class="card-text">更适合龙高宝宝体质的校园墙</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <i class="bi bi-speedometer2 display-4 text-primary"></i>
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <h3 class="card-title mt-3">即刻发表</h3>
-                                    <p class="card-text">只需一步，轻松完成发言！无需等待，快速分享你的心声。</p>
-                                </div>
-                                <div class="col-md-6">
-
-                                </div>
+            <div class="col-12">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <i class="bi bi-speedometer2 display-4 text-primary"></i>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h3 class="card-title mt-3">即刻发表</h3>
+                                <p class="card-text">只需一步，轻松完成发言！无需等待，快速分享你的心声。</p>
+                            </div>
+                            <div class="col-md-6">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <i class="bi bi-heart-fill display-4 text-danger"></i>
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <h3 class="text-center">wall.long-gao.com</h3>
-                                </div>
-                                <div class="col-md-6">
-                                    <h3 class="card-title mt-3">一个网址，随时访问</h3>
-                                    <p class="card-text">无论何时何地，只需记住一个网址，即可随时随地访问校园墙，分享你的故事。</p>  
-                                </div>
+            </div>
+            <div class="col-12">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <i class="bi bi-heart-fill display-4 text-danger"></i>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h3 class="text-center">wall.long-gao.com</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="card-title mt-3">一个网址，随时访问</h3>
+                                <p class="card-text">无论何时何地，只需记住一个网址，即可随时随地访问校园墙，分享你的故事。</p>  
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <i class="bi bi-bar-chart-line display-4 text-success"></i>
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <h3 class="card-title mt-3">发出你的第一条消息</h3>
-                                    <p class="card-text">在这里，你可以随意表达自己的想法，分享你的故事。无论是文字还是文件，我们都支持！</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-form">
-                                        <form id="input-form" onsubmit="event.preventDefault(); handleFormSubmit();">
-                                            <textarea name="text" placeholder="想说什么就说什么..." style="margin-bottom: 10px;resize: none;"></textarea>
-                                            <div class="d-flex flex-nowrap g-3 mb-2">
-                                                <div class="flex-fill">
-                                                    <button type="submit" id="submit-button" class="w-100 btn btn-success">提交</button>
-                                                </div>
+            </div>
+            <div class="col-12">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <i class="bi bi-bar-chart-line display-4 text-success"></i>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h3 class="card-title mt-3">发出你的第一条消息</h3>
+                                <p class="card-text">在这里，你可以随意表达自己的想法，分享你的故事。无论是文字还是文件，我们都支持！</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-form">
+                                    <form id="input-form" onsubmit="event.preventDefault(); handleFormSubmit();">
+                                        <textarea name="text" placeholder="想说什么就说什么..." style="margin-bottom: 10px;resize: none;"></textarea>
+                                        <div class="d-flex flex-nowrap g-3 mb-2">
+                                            <div class="flex-fill">
+                                                <button type="submit" id="submit-button" class="w-100 btn btn-success">提交</button>
                                             </div>
-                                        </form>
-                                        <ul class="flashes" id="flashes">
-                                            {% for message in get_flashed_messages() %}
-                                            <li>{{ message }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <i class="bi bi-bar-chart-line display-4 text-success"></i>
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <h3 class="card-title mt-3">关于本站</h3>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>本站由龙华高级中学2025级3班一名学生搭建，旨在为同学们提供一个快捷自由表达的平台。</p>
-                                    <p>原qq校园墙:3640057926</p>
-                                    <p>网站已全部开源至<a href="https://github.com/renzhen666666/campusWall" target="_blank" rel="noopener">GitHub</a>，欢迎star!</p>
-                                    <p>联系站长: <a href="mailto:w-rz@outlook.com">w-rz@outlook.com</a></p>
+                                        </div>
+                                    </form>
+                                    <ul class="flashes" id="flashes">
+                                        {% for message in get_flashed_messages() %}
+                                        <li>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-
-        <section id="messages" class="py-5"  data-aos="fade-up">
-            <h2 class="mb-4" data-aos="fade-up">热门留言精选</h2>
-            <div class="row g-4" id="hot-messages-container">
-                <div class="col-12" id="loading-hot-messages"> 
-                    <div class="text-center">
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">加载中...</span>
+            <div class="col-12">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <i class="bi bi-bar-chart-line display-4 text-success"></i>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h3 class="card-title mt-3">关于本站</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <p>本站由龙华高级中学2025级3班一名学生搭建，旨在为同学们提供一个快捷自由表达的平台。</p>
+                                <p>原qq校园墙:3640057926</p>
+                                <p>网站已全部开源至<a href="https://github.com/renzhen666666/campusWall" target="_blank" rel="noopener">GitHub</a>，欢迎star!</p>
+                                <p>联系站长: <a href="mailto:w-rz@outlook.com">w-rz@outlook.com</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <div class="modal fade" id="notice" tabindex="-1" aria-labelledby="noticeLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-height: 500px;overflow-y: auto;">
-            <div class="modal-content" style="background-color: #fff;">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="noticeLabel">公告</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-                <div class="modal-body" id="notice-content">
-                    <div class="text-center">
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">加载中...</span>
-                        </div>
+
+    <section id="messages" class="py-5"  data-aos="fade-up">
+        <h2 class="mb-4" data-aos="fade-up">热门留言精选</h2>
+        <div class="row g-4" id="hot-messages-container">
+            <div class="col-12" id="loading-hot-messages"> 
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">加载中...</span>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+</main>
+
+
+{% endblock %}
+
+
+{% block body_end %}
+<footer class="bg-dark text-light py-5">
+    <div class="container text-center">
+        <p class="mb-4">&copy; 2025 龙华高级中学校园墙</p>
+        <div class="social-links">
+            <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-light"><i class="bi bi-instagram"></i></a>
         </div>
     </div>
+</footer>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const month = today.getFullYear() + '-' + (today.getMonth() + 1);
+    const hasVisited = localStorage.getItem('hasVisitedWall' + month);
+    if (!hasVisited) {
+        const noticeModal = new bootstrap.Modal(document.getElementById('notice'));
+        noticeModal.show();
+        localStorage.setItem('hasVisitedWall' + month, 'true');
+    }
+    loadHotMessage();
+});
+</script>
+{% endblock %}
 
-    <footer class="bg-dark text-light py-5">
-        <div class="container text-center">
-            <p class="mb-4">&copy; 2025 龙华高级中学校园墙</p>
-            <div class="social-links">
-                <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-light"><i class="bi bi-instagram"></i></a>
-            </div>
-        </div>
-    </footer>
-    <script>AOS.init({duration: 1000,offset: 100});</script>
-    <script src="{{jscss_url}}js/notice.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const today = new Date();
-        const month = today.getFullYear() + '-' + (today.getMonth() + 1);
-        const hasVisited = localStorage.getItem('hasVisitedWall' + month);
-        if (!hasVisited) {
-            const noticeModal = new bootstrap.Modal(document.getElementById('notice'));
-            noticeModal.show();
-            localStorage.setItem('hasVisitedWall' + month, 'true');
-        }
-        loadHotMessage();
-    });
-    </script>
-</body>
-</html>

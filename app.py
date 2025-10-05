@@ -195,6 +195,10 @@ def before_request():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+@app.route('/img/<filename>')
+def send_img(filename):
+    return send_from_directory(os.path.join('static', 'img'), filename)
+
 @app.route('/css/<filename>')
 def send_css(filename):
     return send_from_directory('static/css', filename)
@@ -300,6 +304,17 @@ def upload_file(files, filenames):
     except:
         pass
 
+@app.route('/api/apps', methods=['POST'])
+def api_apps():
+    apps = list()
+    for app in os.listdir(os.path.join('static', 'apps')):
+        with open(os.path.join('static', 'apps', app, 'config.json'), 'r', encoding='utf-8') as f:
+            config = json.load(f)
+            apps.append(config)
+
+    return jsonify({"success": True, "apps": apps})
+
+
 @app.route('/wall/comment/<message_id>', methods=['POST'])
 def comment_message(message_id):
     refer = request.form.get('refer', '')
@@ -393,7 +408,9 @@ def wall_submit():
     #    app.logger.error("留言失败：" + str(e))
     #    return jsonify({'success': False, 'error': f'留言失败：{str(e)}'})
 
-
+@app.route('/apps', methods=['GET'])
+def apps():
+    return render_template('apps.html')
 
 @app.route('/wall', methods=['GET'])
 def wall_main():
@@ -816,7 +833,7 @@ def notice_post():
             "user": f'管理员{admin_user}',
             "content": notice_content
         })
-    return redirect('/admin/notice')
+    return redirect('/admin')
 
 @app.route('/admin/report', methods=['GET'])
 def admin_report():

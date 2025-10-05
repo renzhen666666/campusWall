@@ -10,7 +10,7 @@
         {% for permission in permissions %}
         <li class="list-group">
             <div class="d-flex justify-content-between align-items-center">
-                <span class="badge" style="color: black;">{{ permission.description }}</span>
+                <span class="badge">{{ permission.description }}</span>
                 <button class="btn btn-outline-secondary" onclick="window.location.href='{{ permission.url }}'">前往↗</button>
             </div>
         </li>

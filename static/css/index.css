@@ -1,18 +1,5 @@
-:root {
-    --primary-color: #6A0DAD;
-    --secondary-color: #9B59B6;
-    --accent-color: #FF6B6B;
-    --box-sizing: border-box;
-}
 
-button {
-    padding: 10px 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-}
+
 
 .hero-section {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));

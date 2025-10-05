@@ -1,6 +1,6 @@
 .partition-name {
     font-weight: 600;
-    color: #333;
+    color: var(--box-text);
 }
 
 .message-count-container {
@@ -8,8 +8,8 @@
 }
 
 .message-count-badge {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
+    background-color: var(--box-background);
+    border: 1px solid var(--box-border);
     border-radius: 20px;
     padding: 5px 15px;
     font-size: 0.9rem;

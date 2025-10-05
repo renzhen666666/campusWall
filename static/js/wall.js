@@ -1086,9 +1086,29 @@ function showToast(text) {
     toast.addEventListener('hidden.bs.toast', () => toast.remove());
 }
 
+const BASE64_CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
+
+function decimalToBase64(decimal) {
+    if (decimal === 0) return '0';
+    
+    decimal = BigInt(decimal);
+    let result = '';
+    const base = BigInt(64);
+    
+    while (decimal > 0) {
+        const remainder = Number(decimal % base);
+        result = BASE64_CHARS[remainder] + result;
+        decimal = decimal / base;
+    }
+    
+    return result;
+}
+
 async function shareMessage(id) {
+    const newId = decimalToBase64(id);
+    console.log(`https://r-z.top/w/${newId}`);
     try {
-        await navigator.clipboard.writeText(`https://www.rz101.com/wall/message/${id}`);
+        await navigator.clipboard.writeText(`https://r-z.top/w/${newId}`);
         showToast('已复制链接到剪贴板');
     } catch (err) {
         showToast('复制失败，请手动复制');

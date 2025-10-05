@@ -1,214 +1,159 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ message.text[:20] }}... - 龙高校园墙</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="{{jscss_url}}css/wall_min.css">
-    <link rel="stylesheet" href="{{jscss_url}}css/message_detail.css">
-    <script src="{{jscss_url}}js/like_min.js"></script>
-    <link rel="stylesheet" href="{{jscss_url}}css/main_style_min.css">
-</head>
-<body>
-    <nav class="navbar navbar-expand bg-white shadow-sm">  
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="/">
-                <i class="bi bi-chat-square-text fs-4"></i>
-                首页
-            </a>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    校园墙
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/wall">龙高校园墙</a></li>
-                </ul>
+{% extends "main.html" %}
+
+{% block title %}{{ message.text[:20] }}... - 龙高校园墙{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{jscss_url}}css/wall_min.css">
+<link rel="stylesheet" href="{{jscss_url}}css/message_detail_min.css">
+<script src="{{jscss_url}}js/like_min.js"></script>
+{% endblock %}
+
+
+
+{% block bodyContent %}
+<div class="container message-detail-container">
+    <div class="message-detail-card">
+        <div class="message-detail-header">
+            <div class="message-detail-timestamp">{{ message.timestamp }}</div>
+        </div>
+        
+        <div class="message-detail-content">
+            <div class="message-detail-text">{{ message.text }}</div>
+            
+            {% if message.files %}
+            <div class="message-detail-attachments">
+                {% for file in message.files %}
+                    {% set ext = file.split('.')[-1].lower() %}
+                    {% if ext in ['png', 'jpg', 'jpeg', 'gif'] %}
+                        <img src="{{ static_url }}uploads/{{ file }}" 
+                                alt="{{ file }}" 
+                                class="message-detail-attachment" 
+                                onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">
+                    {% elif ext in ['mp4', 'avi', 'mov', 'webm'] %}
+                        <div class="video-container" style="cursor: pointer;" onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">
+                            <video class="message-detail-attachment">
+                                <source src="{{ static_url }}tiny_files/{{ file }}" type="video/mp4">
+                            </video>
+                        </div>
+                    {% elif ext in ['mp3', 'wav', 'aac', 'flac', 'm4a', 'mid'] %}
+                        <audio controls>
+                            <source src="{{ static_url }}uploads/{{ file }}" type="audio/mpeg">
+                        </audio>
+                    {% else %}
+                        <div class="file-attachment" style="cursor: pointer;" onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">
+                            <span>📎 {{ file }}</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            <div class="navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ms-2">
-                        <button class="nav-link" id="noticeBtn" data-bs-toggle="modal" data-bs-target="#notice">公告</button>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="/help">帮助</a></li>
-                    <li class="nav-item ms-2">
-                        <button class="btn btn-primary" id="publishBtn" data-bs-toggle="modal" onclick="window.location.href='/wall'">
-                            <i class="bi bi-pencil-square me-1"></i> 我要发贴
-                        </button>
-                    </li>
+            {% endif %}
+        </div>
+        
+        <div class="message-detail-actions">
+            <button class="like-button {% if message.liked %}liked{% endif %}" 
+                    onclick="likeMessage({{ message.id }})" 
+                    id="like-{{ message.id }}">
+                {{ message.likes }} 👍
+            </button>
+            <button class="dislike-button {% if message.disliked %}disliked{% endif %}" 
+                    onclick="dislikeMessage({{ message.id }})" 
+                    id="dislike-{{ message.id }}">👎
+            </button>
+            <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton-{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                    ⋮
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-{{ message.id }}">
+                    <li><a class="dropdown-item" href="/help/report/{{ message.id }}">举报</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="refreshMessage({{ message.id }})">刷新</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="shareMessage({{ message.id }})">分享</a></li>
                 </ul>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <div class="container message-detail-container">
-        <div class="message-detail-card">
-            <div class="message-detail-header">
-                <div class="message-detail-timestamp">{{ message.timestamp }}</div>
-            </div>
-            
-            <div class="message-detail-content">
-                <div class="message-detail-text">{{ message.text }}</div>
+    <div class="message-detail-card mt-4" id="comment-form">
+        <div class="message-detail-content">
+            <h5>发表评论</h5>
+            <form class="comment-form" id="comment-form-{{ message.id }}" onsubmit="event.preventDefault(); submitComment({{ message.id }});">
+                <textarea 
+                    name="text" 
+                    class="form-control comment-input shadow-sm border-2" 
+                    placeholder="写下你的评论..." 
+                    rows="3"></textarea>
                 
-                {% if message.files %}
-                <div class="message-detail-attachments">
-                    {% for file in message.files %}
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                        <label for="comment-file-{{ message.id }}" class="btn btn-outline-primary">
+                            <img src="/static/file_addition.png" alt="文件" class="img-fluid" style="width: 20px; height: 20px;">
+                        </label>
+                        <input type="file" name="file" multiple accept="image/*,audio/*,video/*" id="comment-file-{{ message.id }}" class="d-none">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <img src="/static/send.png" alt="发送" class="img-fluid" style="width: 20px; height: 20px;">
+                    </button>
+                </div>
+            </form>
+            <div class="progress-bar-container" style="display:none; padding: 0 1rem 1rem;">
+                <div class="progress-bar" id="uploadProgressBar" style="width: 0%;"></div>
+                <div id="status-text" style="text-align: center; margin-top: 5px;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="comments-section">
+        <div class="comments-header">
+            评论 ({{ message.comments|length }})
+        </div>
+        
+        {% if message.comments %}
+        <ul class="comments-list">
+            {% for comment in message.comments %}
+            <li class="comment-item">
+                <div class="comment-header">
+                    <div class="comment-timestamp">{{ loop.index }}楼 | {{ comment.timestamp }}</div>
+                </div>
+                <div class="comment-text">{% if comment.refer %}<p>回复"{{ comment.refer }}":</p>{% endif %}{{ comment.text }}</div>
+                {% if comment.files %}
+                <div class="comment-attachments">
+                    {% for file in comment.files %}
                         {% set ext = file.split('.')[-1].lower() %}
                         {% if ext in ['png', 'jpg', 'jpeg', 'gif'] %}
                             <img src="{{ static_url }}uploads/{{ file }}" 
-                                 alt="{{ file }}" 
-                                 class="message-detail-attachment" 
-                                 onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">
-                        {% elif ext in ['mp4', 'avi', 'mov', 'webm'] %}
-                            <div class="video-container" style="cursor: pointer;" onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">
-                                <video class="message-detail-attachment">
-                                    <source src="{{ static_url }}tiny_files/{{ file }}" type="video/mp4">
-                                </video>
-                            </div>
+                                    alt="{{ file }}" 
+                                    class="comment-attachment" 
+                                    onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">
                         {% elif ext in ['mp3', 'wav', 'aac', 'flac', 'm4a', 'mid'] %}
                             <audio controls>
                                 <source src="{{ static_url }}uploads/{{ file }}" type="audio/mpeg">
                             </audio>
+                        {% elif ext in ['mp4', 'avi', 'mov', 'webm'] %}
+                            <div class="video-container" onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">
+                                <video class="comment-attachment">
+                                    <source src="{{ static_url }}tiny_files/{{ file }}" type="video/mp4">
+                                </video>
+                            </div>
                         {% else %}
-                            <div class="file-attachment" style="cursor: pointer;" onclick="openFileViewer({{ message.files }}, {{ loop.index0 }})">
+                            <div class="file-attachment" onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">
                                 <span>📎 {{ file }}</span>
                             </div>
                         {% endif %}
                     {% endfor %}
                 </div>
                 {% endif %}
-            </div>
-            
-            <div class="message-detail-actions">
-                <button class="like-button {% if message.liked %}liked{% endif %}" 
-                        onclick="likeMessage({{ message.id }})" 
-                        id="like-{{ message.id }}">
-                    {{ message.likes }} 👍
-                </button>
-                <button class="dislike-button {% if message.disliked %}disliked{% endif %}" 
-                        onclick="dislikeMessage({{ message.id }})" 
-                        id="dislike-{{ message.id }}">👎
-                </button>
-                <div class="dropdown">
-                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton-{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                        ⋮
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-{{ message.id }}">
-                        <li><a class="dropdown-item" href="/help/report/{{ message.id }}">举报</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="refreshMessage({{ message.id }})">刷新</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="shareMessage({{ message.id }})">分享</a></li>
-                    </ul>
-                </div>
-            </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="p-4 text-center text-muted">
+            暂无评论，快来发表第一条评论吧！
         </div>
-
-        <div class="message-detail-card mt-4" id="comment-form">
-            <div class="message-detail-content">
-                <h5>发表评论</h5>
-                <form class="comment-form" id="comment-form-{{ message.id }}" onsubmit="event.preventDefault(); submitComment({{ message.id }});">
-                    <textarea 
-                        name="text" 
-                        class="form-control comment-input shadow-sm border-2" 
-                        placeholder="写下你的评论..." 
-                        rows="3"></textarea>
-                    
-                    <div class="d-flex justify-content-between align-items-center mt-3">
-                        <div>
-                            <label for="comment-file-{{ message.id }}" class="btn btn-outline-primary">
-                                <img src="/static/file_addition.png" alt="文件" class="img-fluid" style="width: 20px; height: 20px;">
-                            </label>
-                            <input type="file" name="file" multiple accept="image/*,audio/*,video/*" id="comment-file-{{ message.id }}" class="d-none">
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <img src="/static/send.png" alt="发送" class="img-fluid" style="width: 20px; height: 20px;">
-                        </button>
-                    </div>
-                </form>
-                <div class="progress-bar-container" style="display:none; padding: 0 1rem 1rem;">
-                    <div class="progress-bar" id="uploadProgressBar" style="width: 0%;"></div>
-                    <div id="status-text" style="text-align: center; margin-top: 5px;"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="comments-section">
-            <div class="comments-header">
-                评论 ({{ message.comments|length }})
-            </div>
-            
-            {% if message.comments %}
-            <ul class="comments-list">
-                {% for comment in message.comments %}
-                <li class="comment-item">
-                    <div class="comment-header">
-                        <div class="comment-timestamp">{{ loop.index }}楼 | {{ comment.timestamp }}</div>
-                    </div>
-                    <div class="comment-text">{% if comment.refer %}<p>回复"{{ comment.refer }}":</p>{% endif %}{{ comment.text }}</div>
-                    {% if comment.files %}
-                    <div class="comment-attachments">
-                        {% for file in comment.files %}
-                            {% set ext = file.split('.')[-1].lower() %}
-                            {% if ext in ['png', 'jpg', 'jpeg', 'gif'] %}
-                                <img src="{{ static_url }}uploads/{{ file }}" 
-                                     alt="{{ file }}" 
-                                     class="comment-attachment" 
-                                     onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">
-                            {% elif ext in ['mp3', 'wav', 'aac', 'flac', 'm4a', 'mid'] %}
-                                <audio controls>
-                                    <source src="{{ static_url }}uploads/{{ file }}" type="audio/mpeg">
-                                </audio>
-                            {% elif ext in ['mp4', 'avi', 'mov', 'webm'] %}
-                                <div class="video-container" onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">
-                                    <video class="comment-attachment">
-                                        <source src="{{ static_url }}tiny_files/{{ file }}" type="video/mp4">
-                                    </video>
-                                </div>
-                            {% else %}
-                                <div class="file-attachment" onclick="openFileViewer({{ comment.files }}, {{ loop.index0 }})">
-                                    <span>📎 {{ file }}</span>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <div class="p-4 text-center text-muted">
-                暂无评论，快来发表第一条评论吧！
-            </div>
-            {% endif %}
-        </div>
+        {% endif %}
     </div>
+</div>
+{% endblock %}
 
-    <div class="modal fade" id="fileModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen m-0">
-            <div class="modal-content p-0">
-                <div class="modal-header" style="background-color: #000000dd;">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="color:black;font-size: 30px; opacity: 1; filter: brightness(1.5);">X</button>
-                </div>
-                <div class="modal-body p-0 m-0" style="background-color: #000000dd; height: 90vh;">
-                    <div class="d-flex align-items-center justify-content-center h-100 w-100">
-                        <button class="btn btn-outline-light btn-circle btn-prev position-fixed start-0 top-50 translate-middle-y" 
-                                onclick="prevFile()" style="z-index: 1050;">
-                            <span class="bi bi-chevron-left" style="font-size: 2rem;">←</span>
-                        </button>
-                        
-                        <div id="modalContent" class="text-center w-100 h-100"></div>
-                        
-                        <button class="btn btn-outline-light btn-circle btn-next position-fixed end-0 top-50 translate-middle-y"
-                                onclick="nextFile()" style="z-index: 1050;">
-                            <span class="bi bi-chevron-right" style="font-size: 2rem;">→</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div hidden id="staticUrl">{{ static_url }}</div>
-    <script src="/js/wall.js"></script>
-</body>
-</html>
+{% block body_end %}
+<script src="/js/wall_min.js"></script>
+<div hidden id="staticUrl">{{ static_url }}</div>
+{% endblock %}
