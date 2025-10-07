@@ -1,0 +1,52 @@
+{
+    "base_url": "http://localhost:541/api",
+    "apis": [
+        {
+            "name": "get_messages",
+            "path": "/get_messages",
+            "method": "GET",
+            "dir": "",
+            "args": [
+                {
+                    "name": "start",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "end",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "sort",
+                    "type": "str",
+                    "required": false,
+                    "limit_values":["newest", "likes", "dislikes"]
+                },
+                {
+                    "name": "word",
+                    "type": "str",
+                    "required": false
+                },
+                {
+                    "name": "filter",
+                    "type": "str",
+                    "required": false,
+                    "limit_values":["all", "files"]
+                }
+            ]
+        },
+        {
+            "name": "get_message_list",
+            "path": "/get_message_list",
+            "dir":"",
+            "method": "POST"
+        },
+        {
+            "name": "get_partition_messages",
+            "path": "/get_partition_messages",
+            "dir":"",
+            "method": "POST"
+        }
+    ]
+}
