@@ -1,9 +1,0 @@
-{
-    "name": "龙高共享网盘",
-    "partition": "utilities",
-    "author": "wrz",
-    "appDescription": "免费向龙高学生提供的共享网盘，支持文件上传、下载、分享等功能。搭建自开源应用Openlist",
-    "iconBackground": "linear-gradient(135deg, #9B59B6, #8A2BE2);",
-    "appIconElement": "<img src='https://wall.long-gao.com/static/apps/cloud/icon.png' alt='龙高共享网盘' style='width: 100%;'>",
-    "url": "https://openlist.long-gao.com/"
-}
