@@ -1,0 +1,39 @@
+{% extends "admin_main.html" %}
+
+{% block title %}查看举报信息 - 龙高校园墙{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>管理员后台 - 举报信息管理</h2>
+
+    <div class="mb-3 d-flex align-items-center gap-3">
+        <button class="btn btn-primary" onclick="refreshMessages()">刷新消息</button>
+    </div>
+
+    <div id="messageList" class="row g-3">
+        <ul class="list-group">
+            {% for message_id in message_ids %}
+            <li class="list-group-item">
+                <div class="messageinfo" id="messageinfo-{{ message_id }}"></div>
+                <div class="mt-2">
+                    <h2>有{{ reports[message_id]|length }}个用户举报此信息</h2>
+                    <ul>
+                        {% for report in reports[message_id] %}
+                        <li>
+                            <strong>举报内容:</strong> {{ report.text }}<br>
+                            <strong>举报时间:</strong> {{ report.timestamp }}<br>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteReport('{{ message_id }}', '{{ report.id }}')">删除</button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_end %}
+<script src="/js/admin_report_min.js"></script>
+{% endblock %}

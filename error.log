@@ -1,0 +1,28 @@
+2025-08-20 19:07:45 || GET http://127.0.0.1:541/help || help.html
+2025-08-20 21:22:04 || GET http://127.0.0.1:541/help/form || block 'head' defined twice
+2025-08-20 21:22:06 || GET http://127.0.0.1:541/help/form || block 'head' defined twice
+2025-08-21 11:12:54 || GET http://127.0.0.1:541/help/report || help_report.html
+2025-08-22 11:59:41 || POST http://localhost:541/admin/api/delete_report/31/76410175b3cb4592a78c4928201e0f32 || 'dict' object cannot be interpreted as an integer
+2025-08-22 12:01:07 || POST http://localhost:541/admin/api/delete_report/31/76410175b3cb4592a78c4928201e0f32 || 'dict' object cannot be interpreted as an integer
+2025-08-22 20:33:53 || POST http://localhost:541/wall/comment/31 || MessageManager.comment_message() got an unexpected keyword argument 'refer'
+2025-08-22 20:40:02 || POST http://localhost:541/wall/submit || The view function for 'wall_submit' did not return a valid response. The function either returned None or ended without a return statement.
+2025-08-22 20:41:01 || POST http://localhost:541/wall/submit || The view function for 'wall_submit' did not return a valid response. The function either returned None or ended without a return statement.
+2025-08-31 00:05:53 || GET http://127.0.0.1/api/get_all_messages || 'MessageManager' object has no attribute 'get_all_messages'
+2025-08-31 11:45:28 || POST http://localhost:541/help/form || MailSender.send_mail() missing 2 required positional arguments: 'send_email' and 'template'
+2025-08-31 11:48:47 || POST http://localhost:541/help/form || MailSender.send_response_email() missing 1 required positional argument: 'strongtitle'
+2025-08-31 11:49:38 || POST http://localhost:541/help/form || [Errno 2] No such file or directory: 'response_mail_template.html'
+2025-08-31 11:50:17 || POST http://localhost:541/help/form || list.append() takes exactly one argument (0 given)
+2025-09-12 18:27:16 || GET http://127.0.0.1:541/wall || 'str' object has no attribute 'vary'
+2025-09-14 00:08:11 || POST http://localhost:541/wall/submit || 'NoneType' object is not iterable
+2025-09-14 00:10:06 || POST http://localhost:541/wall/submit || 'NoneType' object is not iterable
+2025-09-20 20:31:53 || POST http://localhost:541/api/get_partition_messages || 'partition'
+2025-09-20 23:04:26 || POST http://localhost:541/wall/submit || 'NoneType' object is not iterable
+2025-09-20 23:05:40 || POST http://localhost:541/wall/submit || 'NoneType' object is not iterable
+2025-09-20 23:28:22 || POST http://localhost:541/api/get_partition_messages || 'partition'
+2025-09-26 23:47:49 || POST http://localhost:541/admin/api/delete_report/31/6eb7ea8113404451987ff89272199dc5 || 'NoneType' object has no attribute 'append'
+2025-09-26 23:47:52 || POST http://localhost:541/admin/api/delete_report/31/1ac452685d0a4535a9e46a6386e6e2d2 || 'NoneType' object has no attribute 'append'
+2025-10-03 02:20:11 || GET http://localhost:541/ || Encountered unknown tag 'extend'.
+2025-10-03 02:51:32 || GET http://localhost:541/apps || block 'title' defined twice
+2025-11-28 20:05:48 || GET http://127.0.0.1:541/100!!! || block 'head' defined twice
+2025-11-28 20:06:38 || GET http://127.0.0.1:541/100!!! || block 'bodyContent' defined twice
+2025-11-28 22:18:13 || GET http://127.0.0.1:541/festival/100 || block 'helpActive' defined twice

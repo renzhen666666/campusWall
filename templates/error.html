@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+
+{% block title %}出错了 - 龙华*高级中学校园墙 (゜-゜)つロ 干杯~{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{jscss_url}}css/index_min.css">
+<link rel="stylesheet" href="{{jscss_url}}css/error_min.css">
+{% endblock %}
+
+
+{% block content %}
+<section class="error-section text-center text-light" data-aos="fade-up">
+    <canvas id="particleCanvas"></canvas>
+    <div class="error-icon">⚠️</div>
+    <div class="error-code">{{ error_code }}</div>
+    <h1>{{ h1_text }}</h1>
+    <p class="lead">{{ text }}</p>
+    <div class="mt-4">
+        <h3>可能的原因：</h3>
+        <ul class="reasons">
+            <li>服务器正在打盹</li>
+        </ul>
+    </div>
+    
+    <a href="{{ continue_url }}" class="continue-btn">返回首页</a>
+</section>
+{% endblock %}
+
+
+{% block body_end%}
+<script src="/js/error_min.js"></script>
+{% endblock %}

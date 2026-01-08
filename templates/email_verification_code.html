@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮箱验证码 - 龙高校园墙</title>
+    <style>
+        :root {
+            --primary-color: #6A0DAD;
+            --secondary-color: #9B59B6;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-radius: 12px;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .email-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .email-header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .email-content {
+            padding: 30px;
+        }
+        
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .verification-box {
+            background-color: var(--light-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .verification-code {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: var(--primary-color);
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(106, 13, 173, 0.1);
+            display: inline-block;
+        }
+        
+        .warning {
+            background-color: #fff8e6;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .signature {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .signature strong {
+            color: var(--primary-color);
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white !important;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(106, 13, 173, 0.3);
+        }
+        
+        .highlight {
+            background-color: #fff8e6;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h1>龙高校园墙 验证码</h1>
+        </div>
+        
+        <div class="email-content">
+            <p class="greeting">亲爱的同学：</p>
+            
+            <p>您正在申请获取龙高校园墙的邮箱验证码，以下是您的验证码：</p>
+            
+            <div class="verification-box">
+                <p>您的验证码是：</p>
+                <div class="verification-code">verificationcode</div>
+                <p>验证码有效期为10分钟，请尽快使用。</p>
+            </div>
+            
+            <div class="warning">
+                <p><strong>安全提醒：</strong>请勿将验证码透露给他人，包括以任何理由索要验证码的客服或工作人员。</p>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="https://wall.long-gao.com/wall" class="btn-primary">返回校园墙</a>
+            </div>
+            
+            <div class="signature">
+                <p>此致</p>
+                <p><strong>龙高校园墙</strong></p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>本邮件由系统自动发送，请勿直接回复</p>
+            <p>© 2025 龙华高级中学校园墙</p>
+            <p>深圳市龙华高级中学校园墙</p>
+        </div>
+    </div>
+</body>
+</html>

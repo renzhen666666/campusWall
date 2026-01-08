@@ -1,0 +1,92 @@
+{% extends "main.html" %}
+
+
+{% block head %}
+<link rel="stylesheet" href="/css/index_min.css">
+<link rel="stylesheet" href="/css/100_min.css">
+{% endblock %}
+
+{% block bodyContent %}
+<div class="firework-container" id="firework-container"></div>
+<div class="confetti-container" id="confetti-container"></div>
+
+<main class="container mt-4">
+    <section class="celebration-hero text-center text-light">
+        <div class="row g-4">
+            <div class="col-12 align-items-center">
+
+                <h1 class="white-text">与你相遇</h1>
+                <h2 class="white-text display-4">
+                    第
+                    <span class="fw-bold text-warning">100</span>
+                    天! ! !
+                </h2>
+            </div>
+            <div class="col-12"> 
+                <div class="col-12 d-flex flex-column align-items-center">
+                    <button id="launch-fireworks" class="white btn btn-primary me-2 mb-2" style="background-color: #6A0DAD; border-color: #6A0DAD;box-shadow: #6a0dad91;">Boom!!!</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="data-section">
+        <h2 class="text-center mb-4">100天数据回顾</h2>
+        <div class="row g-4">
+            <div class="col-4">
+                <div class="stats-card text-center">
+                    <div class="stats-number" data-target="292">0</div>
+                    <p class="mb-0">总留言数</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="stats-card text-center">
+                    <div class="stats-number" data-target="1735">0</div>
+                    <p class="mb-0">总点赞数</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="stats-card text-center">
+                    <div class="stats-number" data-target="538">0</div>
+                    <p class="mb-0">评论总数</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="leaving-message">
+        <div class="card g-4 shadow">
+            <div class="card-header">  
+                <h3 class="mb-0">留下你的话语</h3>
+                <p class="text-muted mb-0">写下你对校园墙的建议与期望</p>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <input type="text" id="barrage-input" class="form-control" placeholder="写下你想说的话...">
+                    </div>
+                    <div class="col-md-4">
+                        <button id="send-barrage" class="btn btn-primary w-100">发送弹幕</button>
+                    </div>
+                </div>
+                
+                <div class="barrage-container mt-4 position-relative" style="height: 300px; overflow: hidden; border-radius: 10px; background: rgba(0,0,0,0.05);">
+                    <div id="barrage-display" class="position-absolute w-100 h-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5 text-center">
+        <h3 class="mb-4">继续书写我们的故事</h3>
+        <a href="/wall" class="btn btn-lg" style="background-color: #6A0DAD; color: white; border-color: #6A0DAD;">
+            前往校园墙继续分享
+        </a>
+    </section>
+</main>
+{% endblock %}
+
+{% block body_end %}
+<script src="/js/100_min.js"></script>
+{% endblock %}

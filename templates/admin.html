@@ -1,0 +1,24 @@
+{% extends "admin_main.html" %}
+
+{% block title %}管理员后台 - 龙高校园墙{% endblock %}
+
+{% block content %}
+<div class="container mt-4 shadow">
+    <h1>你好，{{ username }}！</h1>
+    <h2>当前权限有:</h2>
+    <ul class="list-group mb-4 g-4">
+        {% for permission in permissions %}
+        <li class="list-group">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="badge">{{ permission.description }}</span>
+                <button class="btn btn-outline-secondary" onclick="window.location.href='{{ permission.url }}'">前往↗</button>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="card-footer">
+        <button class="btn btn-outline-secondary" onclick="window.location.href='/admin/logout'">退出登录</button>
+    </div>
+</div>
+{% endblock %}
+
