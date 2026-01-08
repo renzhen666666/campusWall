@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>{% block title %}龙华*高级中学校园墙 (゜-゜)つロ 干杯~{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="dd522469-2b45-4814-812e-202678ccee7a"></script>
+    {% block head %}
+    {% endblock %}
+    <link rel="stylesheet" href="/css/main_style_min.css">
+    <meta name="description" content="龙华高级中学校园墙 - 一个自由、开放、包容的学生交流平台">
+    <meta name="keywords" content="龙华高级中学,龙高,校园墙,留言板,学校校园墙,留言,贴吧,论坛,学校社区,高中,学生交流,校园生活,校园讨论区,校园,{% block keywords %}Ciallo～(∠・ω< )⌒★{% endblock %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand bg-white shadow-sm">  
+        <div class="container">
+            <button class="btn-menu" id="sidebarToggle" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                <img src="/img/menu.png" alt="菜单" style="width:30px; height:30px; filter: invert(1);">
+            </button>
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+
+                    {% block nav %}
+                    
+                    {% endblock %}
+
+                    {% block publish_btn %}
+                    <li class="nav-item ms-2">
+                        <button class="white btn btn-primary" id="publishBtn" onclick="window.location.href = '/wall#publish'">
+                            <i class="bi bi-pencil-square me-1"></i> 我要发贴
+                        </button>
+                    </li>
+                    {% endblock %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarLabel">
+                <button id="theme-toggle" class="theme-toggle btn btn-outline-light">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </h5>
+            <button type="button" class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: transparent;">
+                <img src="/img/menu-fold.png" alt="关闭菜单" style="width:30px; height:30px; filter: invert(1);"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="sidebar-menu">
+                <ul class="list-unstyled">
+                    <li class="sidebar-item">
+                        <a href="/" class="nav-link sidebar-link {% block homeActive %}{% endblock %}">
+                            <i class="bi bi-house-door me-3"></i>
+                            <span>首页</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/wall" class="nav-link sidebar-link {% block wallActive %}{% endblock %}">
+                            <i class="bi bi-chat-square-text me-3"></i>
+                            <span>校园墙</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/apps" class="nav-link sidebar-link {% block appsActive %}{% endblock %}">
+                            <i class="bi bi-chat-square-text me-3"></i>
+                            <span>应用广场</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/help" class="nav-link sidebar-link {% block helpActive %}{% endblock %}">
+                            <i class="bi bi-question-circle me-3"></i>
+                            <span>帮助</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <button class="nav-link sidebar-link w-100 text-start" data-bs-toggle="modal" data-bs-target="#notice">
+                            <i class="bi bi-bell me-3"></i>
+                            <span>公告</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% block bodyContent %}
+    {% endblock %}
+
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="modal fade" id="notice" tabindex="-1" aria-labelledby="noticeLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-height: 500px;overflow: auto;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="noticeLabel">公告</h4>
+                </div>
+                <div class="modal-body" id="notice-content">
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">加载中...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="fileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen m-0">
+            <div class="modal-content p-0">
+                <div class="modal-header" style="background-color: #000000dd!important;">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="color:black!important;font-size: 30px; opacity: 1; filter: brightness(1.5);">X</button>
+                </div>
+                <div class="modal-body p-0 m-0" style="background-color: #000000dd!important; height: 90vh;">
+                    <div class="d-flex align-items-center justify-content-center h-100 w-100">
+                        <button class="btn btn-outline-light btn-circle btn-prev position-fixed start-0 top-50 translate-middle-y" 
+                                onclick="prevFile()" style="z-index: 1050;">
+                            <span class="bi bi-chevron-left" style="font-size: 2rem;">←</span>
+                        </button>
+                        
+                        <div id="modalContent" class="text-center w-100 h-100"></div>
+                        
+                        <button class="btn btn-outline-light btn-circle btn-next position-fixed end-0 top-50 translate-middle-y"
+                                onclick="nextFile()" style="z-index: 1050;">
+                            <span class="bi bi-chevron-right" style="font-size: 2rem;">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% block body_end %}
+    {% endblock %}
+    <script src="/js/main.js"></script>
+    <script>AOS.init({duration: 1000,offset: 100});</script>
+</body>
+</html>
