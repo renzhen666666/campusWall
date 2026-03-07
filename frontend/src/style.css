@@ -1,0 +1,419 @@
+:root {
+  --primary-light: rgba(106, 13, 173, 0.1);
+  --sidebar-width: 250px;
+  --navbar-height: 64px;
+  --content-max-width: 1200px;
+}
+
+[data-theme="light"] {
+  --primary-dark: #6A0DAD;
+  --primary-color: #9b59b6;
+
+
+  --bg-color: #e0e0e0d2;
+  --card-bg: #ffffff;
+  --card-secondary-bg: #f5f5f5;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --border-color: #e0e0e0;
+  --sidebar-bg: #ffffff;
+  --navbar-bg: #ffffff;
+  --input-bg: #ffffff;
+  --hover-bg: rgba(106, 13, 173, 0.05);
+}
+
+[data-theme="dark"] {
+  --secondary-color: #8a2be2;
+  --primary-dark: #5a0b91;
+
+  --bg-color: #1a1a1a;
+  --card-bg: #2d2d2d;
+  --card-secondary-bg: #3d3d3d;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --border-color: #404040;
+  --sidebar-bg: #2d2d2d;
+  --navbar-bg: #2d2d2d;
+  --input-bg: #3d3d3d;
+  --hover-bg: rgba(106, 13, 173, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+svg path{
+  stroke: #ffffff;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+/* 文本区域样式 */
+
+textarea {
+  resize: none;
+}
+
+input,
+textarea { 
+  background-color: var(--input-bg);
+}
+
+textarea::placeholder, input::placeholder {
+  color: var(--text-primary);
+  opacity: 0.7;
+}
+
+/* 不同浏览器兼容性前缀 */
+textarea::-moz-placeholder { /* Firefox 19+ */
+  color: var(--text-primary);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+textarea:-ms-input-placeholder { /* IE 10+ */
+  color: var(--text-primary);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: var(--text-primary);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(106, 13, 173, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(106, 13, 173, 0.5);
+}
+
+/* Bootstrap 覆盖样式 */
+.card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.form-control,
+.form-select {
+  background-color: var(--input-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--input-bg);
+  border-color: var(--primary-color);
+  color: var(--text-primary);
+}
+
+.form-control::placeholder {
+  color: var(--text-secondary);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--border-color);
+}
+
+/* 实用工具类 */
+.white-text {
+  color: #ffffff;
+}
+
+.white {
+  color: #ffffff;
+}
+
+/* 加载动画 */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 过渡动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* 响应式工具类 */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* 主题切换动画 */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] .theme-toggle:hover,
+[data-theme="dark"] .theme-toggle:hover {
+  background-color: var(--hover-bg);
+}
+
+/* 确保所有组件都使用 CSS 变量 */
+.card,
+.modal,
+.dropdown-menu,
+.toast,
+.tooltip-inner {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* 链接样式 */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* 按钮样式 */
+button {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 输入框样式 */
+input,
+textarea,
+select {
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* 卡片样式 */
+.card {
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 模态框样式 */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 进度条样式 */
+.progress {
+  background-color: var(--border-color);
+}
+
+.progress-bar {
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+/* 徽章样式 */
+.badge {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+/* 表格样式 */
+.table {
+  color: var(--text-primary);
+}
+
+.table th,
+.table td {
+  border-color: var(--border-color);
+}
+
+.table-hover tbody tr:hover {
+  background-color: var(--hover-bg);
+}
+
+/* 列表样式 */
+.list-group-item {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.list-group-item:hover {
+  background-color: var(--hover-bg);
+}
+
+/* 下拉菜单样式 */
+.dropdown-menu {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dropdown-item {
+  color: var(--text-primary);
+}
+
+.dropdown-item:hover {
+  background-color: var(--hover-bg);
+  color: var(--primary-color);
+}
+
+/* 工具提示样式 */
+.tooltip-inner {
+  background-color: var(--text-primary);
+  color: var(--card-bg);
+}
+
+/* 提示框样式 */
+.alert {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* 标签页样式 */
+.nav-tabs {
+  border-color: var(--border-color);
+}
+
+.nav-tabs .nav-link {
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: transparent;
+  color: var(--primary-color);
+}
+
+.nav-tabs .nav-link.active {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--primary-color);
+}
+
+/* 面包屑样式 */
+.breadcrumb {
+  background-color: var(--card-bg);
+}
+
+.breadcrumb-item a {
+  color: var(--primary-color);
+}
+
+.breadcrumb-item.active {
+  color: var(--text-secondary);
+}
+
+/* 分页样式 */
+.page-link {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.page-link:hover {
+  background-color: var(--hover-bg);
+  color: var(--primary-color);
+  border-color: var(--border-color);
+}
+
+.page-item.active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+
+
+@media (max-width: 768px) {
+  * {
+    font-size: x-small;
+  }
+}
